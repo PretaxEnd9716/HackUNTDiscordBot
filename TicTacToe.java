@@ -39,6 +39,10 @@ public class TicTacToe {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     //Places a piece on the board
     public boolean placePiece(int row, int col) {
         //Create variables
@@ -67,6 +71,16 @@ public class TicTacToe {
         }
 
         return placeSuccessful;
+    }
+
+    //Changes turns
+    public void changeTurns()
+    {
+        if(status == ONE)
+            status = TWO;
+
+        else if(status == TWO)
+            status = ONE;
     }
 
     //Checks if there's a winner
@@ -114,6 +128,7 @@ public class TicTacToe {
         boolean match = false;
         char currentPlayer, currentLocation;
         char[][] board = getBoard();
+        row--;
 
         //Sets which player to check for
         if (player == 1)
@@ -143,6 +158,7 @@ public class TicTacToe {
         boolean match = false;
         char currentPlayer, currentLocation;
         char[][] board = getBoard();
+        col--;
 
         //Sets which player to check for
         if (player == 1)
@@ -196,7 +212,9 @@ public class TicTacToe {
         for(int i = 0; i < 3; i++)
         {
             if(leftMatch[i] == currentPlayer)
+            {
                 match = true;
+            }
             else
             {
                 match = false;
@@ -204,7 +222,7 @@ public class TicTacToe {
             }
         }
 
-        if(match)
+        if(!match)
         {
             //Loops through right array
             for(int i = 0; i < 3; i++)
@@ -220,5 +238,24 @@ public class TicTacToe {
         }
 
         return match;
+    }
+
+    public String printBoard()
+    {
+        String boardOutput = "";
+        char[][] board = getBoard();
+
+        for(int r = 0; r < 3; r++)
+        {
+            for(int c = 0; c < 3; c++)
+            {
+                boardOutput += "[";
+                boardOutput += Character.toString(board[r][c]);
+                boardOutput += "]";
+            }
+            boardOutput += "\n";
+        }
+
+        return boardOutput;
     }
 }
